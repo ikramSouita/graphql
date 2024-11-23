@@ -1,0 +1,40 @@
+# Enum pour représenter le type de compte
+enum TypeCompte {
+  COURANT
+  EPARGNE
+}
+
+type Compte {
+  id: ID!
+  solde: Float!
+  dateCreation: String!
+  typeCompte: TypeCompte!
+}
+
+
+input CompteInput {
+  solde: Float!
+  dateCreation: String!
+  typeCompte: TypeCompte! 
+}
+
+type Stats {
+  count: Int!
+  sum: Float!
+  average: Float!
+}
+
+type Query {
+  allComptes: [Compte!]!
+
+  compteById(id: ID!): Compte
+
+  totalSolde: Stats!
+}
+
+type Mutation {
+  deleteCompte(id: ID!): Boolean
+
+  # Crée un nouveau compte
+  saveCompte(compteInput: CompteInput!): Compte
+}
